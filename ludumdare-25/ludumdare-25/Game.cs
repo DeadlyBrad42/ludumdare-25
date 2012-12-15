@@ -29,6 +29,8 @@ namespace ludumdare_25
 		// Textures
 		public static Texture2D Spr_SinglePixel;
 		public static Texture2D Spr_UI_TitleBG;
+		public static Texture2D Spr_Level_LevelBG;
+		public static Texture2D Spr_Actor_Player;
 
 		// Fonts
 		public static SpriteFont ArialLarge;
@@ -56,8 +58,6 @@ namespace ludumdare_25
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
-
 			base.Initialize();
 		}
 
@@ -78,6 +78,8 @@ namespace ludumdare_25
 			#region Textures
 			Spr_SinglePixel = Content.Load<Texture2D>(@"Textures\SinglePixel");
 			Spr_UI_TitleBG = Content.Load<Texture2D>(@"Textures\UI\TitleBG");
+			Spr_Level_LevelBG = Content.Load<Texture2D>(@"Textures\Level\LevelBG");
+			Spr_Actor_Player = Content.Load<Texture2D>(@"Textures\Actors\Player");
 			#endregion
 
 			// Initialize fonts
@@ -85,6 +87,9 @@ namespace ludumdare_25
 			ArialLarge = Content.Load<SpriteFont>(@"Fonts\ArialLarge");
 			ArialSmall = Content.Load<SpriteFont>(@"Fonts\ArialSmall");
 			#endregion
+
+			// Initialize the levels
+			GameManager.CreateLevels();
 		}
 
 		/// <summary>
@@ -132,7 +137,7 @@ namespace ludumdare_25
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			// Draw the screen
-			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 			spriteBatchHUD.Begin();
 			GameManager.Draw(spriteBatch, spriteBatchHUD);
 			spriteBatch.End();

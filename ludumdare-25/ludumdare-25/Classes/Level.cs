@@ -25,9 +25,9 @@ namespace ludumdare_25
 				this.layerDepth = layerDepth;
 			}
 
-			public void Draw(SpriteBatch SB)
+			public void Draw(SpriteBatch spriteBatch)
 			{
-				SB.Draw(this.texture, Camera.getScreenPosition(this.position), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, this.layerDepth);
+				spriteBatch.Draw(this.texture, Camera.getScreenPosition(this.position), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, this.layerDepth);
 			}
 		}
 
@@ -45,34 +45,40 @@ namespace ludumdare_25
 		public void Update(GameTime gameTime)
 		{
 			// update actors
-			for (int i = 0; i < Actors.Count; i++)
+			foreach (Actor actor in Actors)
 			{
-				Actors[i].Update(gameTime);
+				actor.Update(gameTime);
 			}
+
+			// update player
+			player1.Update(gameTime);
 
 			// update camera position
 			UpdateCameraPosition();
 
 			// extend play area
-			if (InputManager.WasKeyPressed(Keys.Q))
+			/*if (InputManager.WasKeyPressed(Keys.Q))
 			{
 				AddToPlayArea(150);
-			}
+			}*/
 		}
 
 		public void Draw(SpriteBatch spriteBatch, SpriteBatch spriteBatchHUD)
 		{
 			//draw backgrounds
-			for (int i = 0; i < backgrounds.Count; i++)
+			foreach (BackgroundItem background in backgrounds)
 			{
-				backgrounds[i].Draw(spriteBatch);
+				background.Draw(spriteBatch);
 			}
 
 			//draw actors
-			for (int i = 0; i < Actors.Count; i++)
+			foreach (Actor actor in Actors)
 			{
-				Actors[i].Draw(spriteBatch);
+				actor.Draw(spriteBatch);
 			}
+
+			// draw player
+			player1.Draw(spriteBatch);
 		}
 
 		private void UpdateCameraPosition()

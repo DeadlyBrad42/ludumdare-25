@@ -138,7 +138,7 @@ namespace ludumdare_25.Managers
 			switch (MenuState)
 			{
 				case MenuState.TitleScreen:
-					Utils.Draw.TextShadow(spritebatchHUD, Game.ArialLarge, "Title here", new Vector2(35, 220), null, Color.BlanchedAlmond, null);
+					Utils.Draw.TextShadow(spritebatchHUD, Game.ArialLarge, "Title here", new Vector2(35, 25), null, Color.BlanchedAlmond, null);
 					Utils.Draw.TextShadow(spritebatchHUD, Game.ArialSmall, "Press Start", new Vector2(325, 500), null, Color.White, null);
 					break;
 				case MenuState.MainMenu:

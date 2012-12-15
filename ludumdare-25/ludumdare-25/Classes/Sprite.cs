@@ -11,40 +11,31 @@ namespace ludumdare_25.Classes
 	class Sprite
 	{
 		public Texture2D texture;
+		public int width;
+		public int height;
 
-		public Sprite(Texture2D texture)
-		{
-			this.texture = texture;
-		}
+		public int AnimationFrame_Current;
+		public float currentFrameTime;
 
-		private int animationframe_current;
-		public int AnimationFrame_Current
+		public void AdvanceFrame(GameTime gameTime)
 		{
-			get
+			currentFrameTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+			if (currentFrameTime >= Game.framerate)
 			{
-				return animationframe_current;
-			}
-			set
-			{
-				animationframe_current = (value < AnimationFrame_Max ? value : 0);
+				currentFrameTime = 0f;
+				AnimationFrame_Current = (AnimationFrame_Current + 1) % AnimationFrame_Max;
 			}
 		}
-		public int AnimationFrame_Max { get; set; }
 
-		/*public Sprite(ContentManager content, String texturePath, int height, int width, int frames)
-		{
-			LoadTexture(content, texturePath);
-			Height = height;
-			Width = width;
+		public int AnimationFrame_Max;
 
-			AnimationFrame_Current = 0;
-			AnimationFrame_Max = frames;
-		}*/
-
-		public Sprite(Texture2D texture, int frames)
+		public Sprite(Texture2D texture, int width, int height, int frames)
 		{
 			this.texture = texture;
+			this.height = height;
+			this.width = width;
 
+			currentFrameTime = 0f;
 			this.AnimationFrame_Current = 0;
 			this.AnimationFrame_Max = frames;
 		}
@@ -57,40 +48,22 @@ namespace ludumdare_25.Classes
 		public Rectangle getDrawArea(Enums.Direction facingDirection)
 		{
 			Rectangle sourceRect = new Rectangle(0, 0, 0, 0);
-			if (facingDirection == Enums.Direction.Down)
+			if (facingDirection == Enums.Direction.Right)
 			{
 				sourceRect = new Rectangle(
-					texture.Width * AnimationFrame_Current,
-					texture.Height * 0,
-					texture.Width,
-					texture.Height
+					width * AnimationFrame_Current,
+					height * 0,
+					width,
+					height
 				);
 			}
 			else if (facingDirection == Enums.Direction.Left)
 			{
 				sourceRect = new Rectangle(
-					texture.Width * AnimationFrame_Current,
-					texture.Height * 1,
-					texture.Width,
-					texture.Height
-				);
-			}
-			else if (facingDirection == Enums.Direction.Right)
-			{
-				sourceRect = new Rectangle(
-					texture.Width * AnimationFrame_Current,
-					texture.Height * 2,
-					texture.Width,
-					texture.Height
-				);
-			}
-			else //if (facingDirection == DataTypes.Direction.Up)
-			{
-				sourceRect = new Rectangle(
-					texture.Width * AnimationFrame_Current,
-					texture.Height * 3,
-					texture.Width,
-					texture.Height
+					width * AnimationFrame_Current,
+					height * 1,
+					width,
+					height
 				);
 			}
 

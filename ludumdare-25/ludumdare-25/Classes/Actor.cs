@@ -28,7 +28,7 @@ namespace ludumdare_25.Classes
 			this.Health_max = health_max;
 			this.Health_current = health_max;
 
-			this.FacingDirection = Enums.Direction.Down;
+			this.FacingDirection = Enums.Direction.Left;
 		}
 	}
 }
