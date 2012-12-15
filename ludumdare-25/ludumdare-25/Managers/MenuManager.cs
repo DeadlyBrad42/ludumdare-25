@@ -33,9 +33,9 @@ namespace ludumdare_25.Managers
 
 	static class MenuManager
 	{
-		static Color colorStandard = Color.White;
-		static Color colorSelected = Color.DarkRed;
-		static Color colorFlash = Color.White;
+		static Color colorStandard = Color.BlanchedAlmond;
+		static Color colorSelected = Color.White;
+		//static Color colorFlash = Color.White;
 
 		static List<MenuItem> menuItems = new List<MenuItem>();
 		static int currentMenuItem = 0;
@@ -110,6 +110,10 @@ namespace ludumdare_25.Managers
 								GameManager.GameState = GameState.HowToPlay;
 								break;
 							case 2:
+								// About screen
+								GameManager.GameState = GameState.About;
+								break;
+							case 3:
 								// Exit game
 								Game.ExitGame();
 								break;
@@ -119,35 +123,51 @@ namespace ludumdare_25.Managers
 			}
 		}
 
-		public static void Draw(SpriteBatch spritebatchHUD)
+		public static void Draw(SpriteBatch spriteBatchHUD)
 		{
 			// Draw the menu background
-			spritebatchHUD.Draw(
-				Game.Spr_UI_TitleBG,
-				Vector2.Zero,
-				new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
-				Color.White,
-				0f,
-				Vector2.Zero,
-				1f,
-				SpriteEffects.None,
-				1f
-			);
-			//spritebatchHUD.Draw(Game.Spr_SinglePixel, new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_WIDTH), Color.DarkGreen);
+			if (MenuState == Managers.MenuState.TitleScreen)
+			{
+				spriteBatchHUD.Draw(
+					Game.Spr_UI_TitleBG,
+					Vector2.Zero,
+					new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+					Color.White,
+					0f,
+					Vector2.Zero,
+					1f,
+					SpriteEffects.None,
+					1f
+				);
+			}
+			else
+			{
+				spriteBatchHUD.Draw(
+					Game.Spr_UI_TitleBG_dark,
+					Vector2.Zero,
+					new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+					Color.White,
+					0f,
+					Vector2.Zero,
+					1f,
+					SpriteEffects.None,
+					1f
+				);
+			}
 
 			switch (MenuState)
 			{
 				case MenuState.TitleScreen:
-					Utils.Draw.TextShadow(spritebatchHUD, Game.ArialLarge, "Title here", new Vector2(35, 25), null, Color.BlanchedAlmond, null);
-					Utils.Draw.TextShadow(spritebatchHUD, Game.ArialSmall, "Press Start", new Vector2(325, 500), null, Color.White, null);
+					Utils.Draw.TextShadow(spriteBatchHUD, Game.ArialLarge, "PRISON BREAK", new Vector2(35, 25), null, Color.BlanchedAlmond, null);
+					Utils.Draw.TextShadow(spriteBatchHUD, Game.ArialSmall, "Press space to start", new Vector2(255, 150), new Vector2(257, 152), Color.BlanchedAlmond, null);
 					break;
 				case MenuState.MainMenu:
 					for (int i = 0; i < menuItems.Count; i++)
 					{
 						if (i == currentMenuItem)
-							menuItems[i].Draw(spritebatchHUD, colorSelected);
+							menuItems[i].Draw(spriteBatchHUD, colorSelected);
 						else
-							menuItems[i].Draw(spritebatchHUD, colorStandard);
+							menuItems[i].Draw(spriteBatchHUD, colorStandard);
 					}
 					break;
 			}
@@ -155,9 +175,10 @@ namespace ludumdare_25.Managers
 
 		public static void CreateMenuItems()
 		{
-			menuItems.Add(new MenuItem("Begin Game", new Vector2(550, 40)));
-			menuItems.Add(new MenuItem("How to Play", new Vector2(550, 100)));
-			menuItems.Add(new MenuItem("Exit Game", new Vector2(550, 160)));
+			menuItems.Add(new MenuItem("Begin Game", new Vector2(600, 20)));
+			menuItems.Add(new MenuItem("How to Play", new Vector2(600, 60)));
+			menuItems.Add(new MenuItem("About", new Vector2(600, 100)));
+			menuItems.Add(new MenuItem("Exit Game", new Vector2(600, 140)));
 		}
 	}
 }

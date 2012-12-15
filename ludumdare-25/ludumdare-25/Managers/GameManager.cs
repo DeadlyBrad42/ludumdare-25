@@ -15,6 +15,7 @@ namespace ludumdare_25
 	{
 		MainMenu,
 		HowToPlay,
+		About,
 		Playing
 	}
 
@@ -42,6 +43,17 @@ namespace ludumdare_25
 						GameState = GameState.MainMenu;
 					}
 					break;
+				case GameState.About:
+					// Await input to go back to main menu
+					if (
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.A) ||
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.Start) ||
+						InputManager.WasKeyPressed(Keys.Space)
+					)
+					{
+						GameState = GameState.MainMenu;
+					}
+					break;
 				case GameState.Playing:
 					// Update the level
 					levels[CurrentLevel].Update(gameTime);
@@ -57,8 +69,32 @@ namespace ludumdare_25
 					MenuManager.Draw(spriteBatchHUD);
 					break;
 				case GameState.HowToPlay:
-					spriteBatchHUD.Draw(Game.Spr_SinglePixel, new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_WIDTH), Color.DarkGreen);
+					spriteBatchHUD.Draw(
+						Game.Spr_UI_TitleBG_dark,
+						Vector2.Zero,
+						new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+						Color.White,
+						0f,
+						Vector2.Zero,
+						1f,
+						SpriteEffects.None,
+						1f
+					);
 					spriteBatchHUD.DrawString(Game.ArialSmall, "How to play screen", new Vector2(179, 540), Color.White);
+					break;
+				case GameState.About:
+					spriteBatchHUD.Draw(
+						Game.Spr_UI_TitleBG_dark,
+						Vector2.Zero,
+						new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+						Color.White,
+						0f,
+						Vector2.Zero,
+						1f,
+						SpriteEffects.None,
+						1f
+					);
+					spriteBatchHUD.DrawString(Game.ArialSmall, "About screen", new Vector2(179, 540), Color.White);
 					break;
 				case GameState.Playing:
 					levels[CurrentLevel].Draw(spriteBatch, spriteBatchHUD);
@@ -79,10 +115,39 @@ namespace ludumdare_25
 			level.playBounds = new Rectangle(0, Game.SCREEN_HEIGHT - 200, 1200, 200);
 
 			// level 1 actors
-			level.player1 = new Player(new Sprite(Game.Spr_Actor_Player, 42, 68, 3), new Vector2(100, 500), level);
+			// Player
+			level.player1 = new Player(
+				new Sprite(Game.Spr_Actors_Player, 42, 68, 3),
+				new Vector2(100, 500),
+				level
+			);
+			// Enemies
+			level.Actors.Add(
+				new Enemy(
+					new Sprite(Game.Spr_Actors_Enemy_1, 42, 68, 3),
+					new Vector2(200, 500),
+					level
+				)
+			);
+			level.Actors.Add(
+				new Enemy(
+					new Sprite(Game.Spr_Actors_Civilian_1, 42, 68, 3),
+					new Vector2(300, 500),
+					level
+				)
+			);
+			level.Actors.Add(
+				new Enemy(
+					new Sprite(Game.Spr_Actors_Civilian_2, 42, 68, 3),
+					new Vector2(400, 500),
+					level
+				)
+			);
 
+			// Add levl
 			levels.Add(level);
 
+			// Init camera
 			Camera.Position = new Vector2(Game.SCREEN_WIDTH / 2, Game.SCREEN_HEIGHT / 2);
 		}
 	}
