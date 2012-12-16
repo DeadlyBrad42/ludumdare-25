@@ -10,12 +10,12 @@ namespace ludumdare_25.Classes
 {
 	abstract class Entity
 	{
-		protected Sprite sprite;
+		public Sprite sprite;
 		public Vector2 position;
 		protected Level currentLevel;
 
 
-		protected float currentFrameTime;
+		//protected float currentFrameTime;
 
 		public Entity(Sprite sprite, Vector2 position, Level currentMap)
 		{

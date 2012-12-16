@@ -14,6 +14,8 @@ namespace ludumdare_25.Classes
 
 		PlayerIndex playerIndex;
 
+		int speed = 2;
+
 		public Player(Sprite sprite, Vector2 position, Level currentLevel)
 			: base(sprite, position, currentLevel, 10)
 		{
@@ -69,8 +71,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Left)
 			)
 			{
-				if(position.X - 2 > currentLevel.playBounds.X)
-					position.X -= 2;
+				if(position.X - speed > currentLevel.playBounds.X)
+					position.X -= speed;
 				FacingDirection = Enums.Direction.Left;
 				movementState = MovementState.Walking;
 				moved = true;
@@ -81,8 +83,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Right)
 			)
 			{
-				if(position.X + 2 + (this.sprite.width) < currentLevel.playBounds.X + currentLevel.playBounds.Width)
-					position.X += 2;
+				if(position.X + speed + (this.sprite.width) < currentLevel.playBounds.X + currentLevel.playBounds.Width)
+					position.X += speed;
 				FacingDirection = Enums.Direction.Right;
 				movementState = MovementState.Walking;
 				moved = true;
@@ -96,8 +98,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Down)
 			)
 			{
-				if(position.Y + 2 + this.sprite.height < currentLevel.playBounds.Y + currentLevel.playBounds.Height)
-					position.Y += 2;
+				if(position.Y + speed + this.sprite.height < currentLevel.playBounds.Y + currentLevel.playBounds.Height)
+					position.Y += speed;
 				//FacingDirection = Enums.Direction.Down;
 				movementState = MovementState.Walking;
 				moved = true;
@@ -108,8 +110,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Up)
 				)
 			{
-				if ((position.Y - 2 + this.sprite.height * (2.0/3.0)) > currentLevel.playBounds.Y)
-					position.Y -= 2;
+				if ((position.Y - speed + this.sprite.height * (2.0/3.0)) > currentLevel.playBounds.Y)
+					position.Y -= speed;
 				//FacingDirection = Enums.Direction.Up;
 				movementState = MovementState.Walking;
 				moved = true;

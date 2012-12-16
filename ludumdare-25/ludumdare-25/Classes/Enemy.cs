@@ -3,11 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ludumdare_25.Utils;
 using ludumdare_25.Managers;
+using System;
 
 namespace ludumdare_25.Classes
 {
 	class Enemy : Actor
 	{
+		int speed = 1;
+
+		bool movingToPoint;
+		Vector2 nextPoint;
+
 		public Enemy(Sprite sprite, Vector2 position, Level currentLevel)
 			: base(sprite, position, currentLevel, 10)
 		{
@@ -54,14 +60,107 @@ namespace ludumdare_25.Classes
 		{
 			bool moved = false;
 
-			// if position is within one screen of player
+			if (
+				Math.Abs(position.X - currentLevel.player1.position.X) < 450 &&	// Position is within one screen of player
+				!movingToPoint													// And not currently moving towards a point
+			)
+			{
+				if (
+					Math.Abs(this.position.Y - currentLevel.player1.position.Y) > 7 || // If enemy is not on same Y as player
+					Math.Abs(this.position.X - currentLevel.player1.position.X) > 350
+				)
+				{
+					// Y direction
+					if (Math.Abs(this.position.Y - currentLevel.player1.position.Y) > 7)
+					{
+						System.Diagnostics.Debug.WriteLine("cop moving in Y!");
+						// Pick next point
+						nextPoint = new Vector2(
+							this.position.X,
+							currentLevel.player1.position.Y
+						);
 
-				// Move onto the same Y as player
-				// Shoot
+						movingToPoint = true;
+					}
+
+					// X direction
+					if (Math.Abs(this.position.X - currentLevel.player1.position.X) > 350)
+					{
+						System.Diagnostics.Debug.WriteLine("cop moving in X!");
+						// Pick next point
+						nextPoint = new Vector2(
+							(
+								(this.position.X > currentLevel.player1.position.X) ?
+								(currentLevel.player1.position.X + 350) :
+								(currentLevel.player1.position.X - 350)
+							),
+							this.position.Y
+						);
+
+						movingToPoint = true;
+					}
+				}
+				else
+				{
+					// shoot
+					System.Diagnostics.Debug.WriteLine("cop BANG!");
+				}
+			}
+
+			// Move towards the next point - Horiztonal direction
+			if (position.X > nextPoint.X)
+			{
+				if (Math.Abs(position.X - nextPoint.X) <= speed)
+					position.X = nextPoint.X;
+				else
+					position.X -= speed;
+				FacingDirection = Enums.Direction.Left;
+				moved = true;
+			}
+			else if (position.X < nextPoint.X)
+			{
+				if (Math.Abs(position.X - nextPoint.X) <= speed)
+					position.X = nextPoint.X;
+				else
+					position.X += speed;
+				FacingDirection = Enums.Direction.Right;
+				moved = true;
+			}
+
+			// Move towards the next point - Horizontal direction
+			if (position.Y > nextPoint.Y)
+			{
+				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+					position.Y = nextPoint.Y;
+				else
+					position.Y -= speed;
+				moved = true;
+			}
+			else if (position.Y < nextPoint.Y)
+			{
+				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+					position.Y = nextPoint.Y;
+				else
+					position.Y += speed;
+				moved = true;
+			}
+
+			// If you've reached the next point, set movingToPoint to false
+			if (
+				Math.Abs(position.X - nextPoint.X) < speed + 1 &&
+				Math.Abs(position.Y - nextPoint.Y) < speed + 1
+			)
+			{
+				movingToPoint = false;
+			}
 
 			if (!moved)
 			{
 				movementState = MovementState.Idle;
+			}
+			else
+			{
+				movementState = MovementState.Walking;
 			}
 		}
 	}
