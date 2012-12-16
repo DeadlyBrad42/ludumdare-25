@@ -107,6 +107,12 @@ namespace ludumdare_25.Classes
 				}
 			}
 
+			// facing direction
+			if (position.X < currentLevel.player1.position.X)
+				FacingDirection = Enums.Direction.Right;
+			else
+				FacingDirection = Enums.Direction.Left;
+
 			// Move towards the next point - Horiztonal direction
 			if (position.X > nextPoint.X)
 			{
