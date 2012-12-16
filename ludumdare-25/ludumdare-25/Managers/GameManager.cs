@@ -112,34 +112,34 @@ namespace ludumdare_25
 			//level.addBackgroundItem(Game.SprStage1FGEntrance, new Vector2(739, 0), 1.0f, 0.1f);
 
 			// Define playbounds
-			level.playBounds = new Rectangle(0, Game.SCREEN_HEIGHT - 200, 1200, 200);
+			level.playBounds = new Rectangle(400, Game.SCREEN_HEIGHT - 200, 3600 - 800, 200);
 
 			// level 1 actors
 			// Player
 			level.player1 = new Player(
 				new Sprite(Game.Spr_Actors_Player, 42, 68, 3),
-				new Vector2(100, 500),
+				new Vector2(450, 500),
 				level
 			);
 			// Enemies
 			level.Actors.Add(
 				new Enemy(
 					new Sprite(Game.Spr_Actors_Enemy_1, 42, 68, 3),
-					new Vector2(200, 500),
+					new Vector2(600, 500),
 					level
 				)
 			);
 			level.Actors.Add(
 				new Civilian(
 					new Sprite(Game.Spr_Actors_Civilian_1, 42, 68, 3),
-					new Vector2(300, 500),
+					new Vector2(1000, 500),
 					level
 				)
 			);
 			level.Actors.Add(
 				new Civilian(
 					new Sprite(Game.Spr_Actors_Civilian_2, 42, 68, 3),
-					new Vector2(400, 500),
+					new Vector2(1100, 500),
 					level
 				)
 			);

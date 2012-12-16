@@ -55,12 +55,6 @@ namespace ludumdare_25
 
 			// update camera position
 			UpdateCameraPosition();
-
-			// extend play area
-			/*if (InputManager.WasKeyPressed(Keys.Q))
-			{
-				AddToPlayArea(150);
-			}*/
 		}
 
 		public void Draw(SpriteBatch spriteBatch, SpriteBatch spriteBatchHUD)
@@ -94,11 +88,6 @@ namespace ludumdare_25
 		public void addBackgroundItem(Texture2D texture, Vector2 position, float speed, float layerDepth)
 		{
 			backgrounds.Add(new BackgroundItem(texture, position, speed, layerDepth));
-		}
-
-		public void AddToPlayArea(int howMuch)
-		{
-			this.playBounds.Width += howMuch;
 		}
 	}
 }
