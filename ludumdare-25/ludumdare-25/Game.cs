@@ -41,6 +41,7 @@ namespace ludumdare_25
 		public static SpriteFont ArialSmall;
 
 		// Misc.
+		public static Random random;
 		public static float framerate = 1f / 10f;
 		static bool exitGame;
 
@@ -49,6 +50,9 @@ namespace ludumdare_25
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
+			random = new Random();
+
+			// Graphics setup
 			graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
 			graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
 			//graphics.IsFullScreen = true;

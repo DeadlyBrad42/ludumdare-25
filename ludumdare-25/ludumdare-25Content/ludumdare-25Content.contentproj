@@ -44,6 +44,7 @@
   <ItemGroup>
     <Folder Include="Music\" />
     <Folder Include="Sounds\" />
+    <Folder Include="Textures\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fonts\ArialLarge.spritefont">

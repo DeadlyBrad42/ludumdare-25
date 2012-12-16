@@ -52,7 +52,7 @@ namespace ludumdare_25.Classes
 				Vector2.Zero,
 				1f,
 				SpriteEffects.None,
-				/*LayerDepth*/ 1f
+				/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
 			);
 
 			base.Draw(spritebatch);
@@ -69,8 +69,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Left)
 			)
 			{
-				if(position.X - 1 > currentLevel.playBounds.X)
-					position.X -= 1;
+				if(position.X - 2 > currentLevel.playBounds.X)
+					position.X -= 2;
 				FacingDirection = Enums.Direction.Left;
 				movementState = MovementState.Walking;
 				moved = true;
@@ -81,8 +81,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Right)
 			)
 			{
-				if(position.X + 1 + (this.sprite.width) < currentLevel.playBounds.X + currentLevel.playBounds.Width)
-					position.X += 1;
+				if(position.X + 2 + (this.sprite.width) < currentLevel.playBounds.X + currentLevel.playBounds.Width)
+					position.X += 2;
 				FacingDirection = Enums.Direction.Right;
 				movementState = MovementState.Walking;
 				moved = true;
@@ -96,8 +96,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Down)
 			)
 			{
-				if(position.Y + 1 + this.sprite.height < currentLevel.playBounds.Y + currentLevel.playBounds.Height)
-					position.Y += 1;
+				if(position.Y + 2 + this.sprite.height < currentLevel.playBounds.Y + currentLevel.playBounds.Height)
+					position.Y += 2;
 				//FacingDirection = Enums.Direction.Down;
 				movementState = MovementState.Walking;
 				moved = true;
@@ -108,8 +108,8 @@ namespace ludumdare_25.Classes
 				InputManager.isKeyHeld(Keys.Up)
 				)
 			{
-				if ((position.Y - 1 + this.sprite.height * (2.0/3.0)) > currentLevel.playBounds.Y)
-					position.Y -= 1;
+				if ((position.Y - 2 + this.sprite.height * (2.0/3.0)) > currentLevel.playBounds.Y)
+					position.Y -= 2;
 				//FacingDirection = Enums.Direction.Up;
 				movementState = MovementState.Walking;
 				moved = true;

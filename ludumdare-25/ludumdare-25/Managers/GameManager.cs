@@ -107,7 +107,7 @@ namespace ludumdare_25
 			Level level = new Level();
 
 			//level 1 backgrounds
-			level.addBackgroundItem(Game.Spr_Level_LevelBG, Vector2.Zero, 0.4f, 0.95f);
+			level.addBackgroundItem(Game.Spr_Level_LevelBG, Vector2.Zero, 0.0f, 0.0f);
 			//level.addBackgroundItem(Game.SprStage1BGMain, Vector2.Zero, 1.0f, 0.90f);
 			//level.addBackgroundItem(Game.SprStage1FGEntrance, new Vector2(739, 0), 1.0f, 0.1f);
 
@@ -130,14 +130,14 @@ namespace ludumdare_25
 				)
 			);
 			level.Actors.Add(
-				new Enemy(
+				new Civilian(
 					new Sprite(Game.Spr_Actors_Civilian_1, 42, 68, 3),
 					new Vector2(300, 500),
 					level
 				)
 			);
 			level.Actors.Add(
-				new Enemy(
+				new Civilian(
 					new Sprite(Game.Spr_Actors_Civilian_2, 42, 68, 3),
 					new Vector2(400, 500),
 					level

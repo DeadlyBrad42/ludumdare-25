@@ -2,15 +2,29 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ludumdare_25.Utils;
+using System;
 using ludumdare_25.Managers;
 
 namespace ludumdare_25.Classes
 {
 	class Civilian : Actor
 	{
+		// For "sporadic" movement
+		int movementPoints;
+		int movementPoints_achieved;
+		bool movingToPoint;
+		Vector2 nextPoint;
+
+		int speed = 3;
+
 		public Civilian(Sprite sprite, Vector2 position, Level currentLevel)
 			: base(sprite, position, currentLevel, 10)
 		{
+			movementPoints = Game.random.Next(3, 6);
+			movementPoints_achieved = 0;
+			movingToPoint = false;
+
+			movementState = MovementState.Walking;
 		}
 
 		public override void Update(GameTime gameTime)
@@ -44,7 +58,7 @@ namespace ludumdare_25.Classes
 				Vector2.Zero,
 				1f,
 				SpriteEffects.None,
-				/*LayerDepth*/ 1f
+				/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
 			);
 
 			base.Draw(spritebatch);
@@ -52,68 +66,73 @@ namespace ludumdare_25.Classes
 
 		public void AI(GameTime gameTime)
 		{
-			/*
-			bool moved = false;
-
-			#region X movement
-			// Moving left
 			if (
-				InputManager.gamePadState_new[(int)playerIndex].ThumbSticks.Left.X < -MOVEMENT_THRESHOLD ||
-				InputManager.isKeyHeld(Keys.Left)
+				Math.Abs(position.X - currentLevel.player1.position.X) < 450 &&	// Position is within one screen of player
+				!movingToPoint													// And not currently moving towards a point
 			)
 			{
-				if(position.X - 1 > currentLevel.playBounds.X)
-					position.X -= 1;
+				if (movementPoints_achieved <= movementPoints)					// If civilian isn't "spent"
+				{
+					// Pick next point
+					nextPoint = new Vector2(
+						Game.random.Next(600) + currentLevel.player1.position.X - 300,
+						Game.random.Next(200) + 425 - this.sprite.height
+					);
+
+					movingToPoint = true;
+				}
+				else{
+					// Run towards beginning of level
+					nextPoint = new Vector2(-200, 500);
+					speed = 5;
+				}
+			}
+
+			// Move towards the next point - Horiztonal direction
+			if(position.X > nextPoint.X)
+			{
+				if (Math.Abs(position.X - nextPoint.X) <= speed)
+					position.X = nextPoint.X;
+				else
+					position.X -= speed;
 				FacingDirection = Enums.Direction.Left;
-				movementState = MovementState.Walking;
-				moved = true;
 			}
-			// Moving right
-			else if (
-				InputManager.gamePadState_new[(int)playerIndex].ThumbSticks.Left.X > MOVEMENT_THRESHOLD ||
-				InputManager.isKeyHeld(Keys.Right)
-			)
+			else if(position.X < nextPoint.X)
 			{
-				if(position.X + 1 + (this.sprite.width) < currentLevel.playBounds.X + currentLevel.playBounds.Width)
-					position.X += 1;
+				if (Math.Abs(position.X - nextPoint.X) <= speed)
+					position.X = nextPoint.X;
+				else
+					position.X += speed;
 				FacingDirection = Enums.Direction.Right;
-				movementState = MovementState.Walking;
-				moved = true;
 			}
-			#endregion
 
-			#region Y movement
-			// Moving down
-			if (
-				InputManager.gamePadState_new[(int)playerIndex].ThumbSticks.Left.Y < -MOVEMENT_THRESHOLD ||
-				InputManager.isKeyHeld(Keys.Down)
+			// Move towards the next point - Horizontal direction
+			if (position.Y > nextPoint.Y)
+			{
+				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+					position.Y= nextPoint.Y;
+				else
+					position.Y -= speed;
+			}
+			else if (position.Y < nextPoint.Y)
+			{
+				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+					position.Y = nextPoint.Y;
+				else
+					position.Y += speed;
+			}
+
+			// If you've reached the next point, set movingToPoint to false
+			if(
+				Math.Abs(position.X - nextPoint.X) < speed + 1 &&
+				Math.Abs(position.Y - nextPoint.Y) < speed + 1
 			)
 			{
-				if(position.Y + 1 + this.sprite.height < currentLevel.playBounds.Y + currentLevel.playBounds.Height)
-					position.Y += 1;
-				//FacingDirection = Enums.Direction.Down;
-				movementState = MovementState.Walking;
-				moved = true;
+				movementPoints_achieved++;
+				movingToPoint = false;
 			}
-			// Moving up
-			else if (
-				InputManager.gamePadState_new[(int)playerIndex].ThumbSticks.Left.Y > MOVEMENT_THRESHOLD ||
-				InputManager.isKeyHeld(Keys.Up)
-				)
-			{
-				if ((position.Y - 1 + this.sprite.height * (2.0/3.0)) > currentLevel.playBounds.Y)
-					position.Y -= 1;
-				//FacingDirection = Enums.Direction.Up;
-				movementState = MovementState.Walking;
-				moved = true;
-			}
-			#endregion
 
-			if (!moved)
-			{
-				movementState = MovementState.Idle;
-			}
-			*/
+			// Run off-screen, dissapear
 		}
 	}
 }
