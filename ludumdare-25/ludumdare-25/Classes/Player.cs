@@ -16,8 +16,12 @@ namespace ludumdare_25.Classes
 
 		int speed = 2;
 
+		public float attackspeed = 300;
+		public float lastattack;
+		public bool attacking;
+
 		public Player(Sprite sprite, Vector2 position, Level currentLevel)
-			: base(sprite, position, currentLevel, 10)
+			: base(sprite, position, currentLevel, 100)
 		{
 			playerIndex = 0;
 			FacingDirection = Enums.Direction.Right;
@@ -35,6 +39,26 @@ namespace ludumdare_25.Classes
 				sprite.AnimationFrame_Current = 0;
 			}
 
+			lastattack += (float)gameTime.ElapsedGameTime.Milliseconds;
+
+			// Handle punching
+			if (attacking && (lastattack > attackspeed))
+			{
+				// We are done attacking
+				attacking = false;
+			}
+			if (
+				lastattack > attackspeed &&
+				(
+					InputManager.WasButtonPressed(playerIndex, Buttons.A) ||
+					InputManager.WasKeyPressed(Keys.Space)
+				)
+			)
+			{
+				lastattack = 0;
+				attacking = true;
+			}
+
 			Move(gameTime);
 
 			// Center the camera on the player
@@ -45,19 +69,53 @@ namespace ludumdare_25.Classes
 
 		public override void Draw(SpriteBatch spritebatch)
 		{
-			spritebatch.Draw(
-				this.sprite.texture,
-				Camera.getScreenPosition(position),
-				this.sprite.getDrawArea(FacingDirection),
-				Color.White,
-				0f,
-				Vector2.Zero,
-				1f,
-				SpriteEffects.None,
-				/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
-			);
+			if (!attacking)
+			{
+				spritebatch.Draw(
+					this.sprite.texture,
+					Camera.getScreenPosition(position),
+					this.sprite.getDrawArea(FacingDirection),
+					drawColor,
+					0f,
+					Vector2.Zero,
+					1f,
+					SpriteEffects.None,
+					/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
+				);
+			}
+			else if (lastattack < attackspeed)
+			{
+				int left = 0;
+				int right = 0;
+
+				if (lastattack <= 100) {left = 0;}
+				else if (lastattack <= 200) {left = 1;}
+				else {left = 2;}
+
+				if(this.FacingDirection == Enums.Direction.Right) {right = 0;}
+				else { right = 1; }
+
+				spritebatch.Draw(
+					Game.Spr_Actors_Player_Punch,
+					Camera.getScreenPosition(position),
+					new Rectangle(60 * left, 68 * right, 60, 68),
+					drawColor,
+					0f,
+					Vector2.Zero,
+					1f,
+					SpriteEffects.None,
+					/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
+				);
+			}
+			else
+			{ }
+
+
+
 
 			base.Draw(spritebatch);
+
+			this.drawColor = Color.White;
 		}
 
 		public void Move(GameTime gameTime)

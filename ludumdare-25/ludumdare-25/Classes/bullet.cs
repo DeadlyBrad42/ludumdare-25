@@ -30,6 +30,16 @@ namespace ludumdare_25.Classes
 				this.position.X += speed;
 			}
 
+			// If the middle X of this hits the middle X of the player, deal damage
+			if (
+				Math.Abs(this.position.X - currentLevel.player1.position.X) < 6 &&
+				Math.Abs(this.position.Y - currentLevel.player1.position.Y) < 5
+			)
+			{
+				currentLevel.player1.takeDamage((5 - (int)Math.Abs(this.position.Y - currentLevel.player1.position.Y)) * 5);
+				this.position.X = -50;
+			}
+
 			//base.Update(gameTime);
 		}
 

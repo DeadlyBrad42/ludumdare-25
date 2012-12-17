@@ -20,6 +20,8 @@ namespace ludumdare_25.Classes
 		public int Health_current;
 		public int Health_max;
 
+		public Color drawColor;
+
 		public Actor(Sprite sprite, Vector2 position, Level currentLevel, int health_max)
 			: base(sprite, position, currentLevel)
 		{
@@ -29,6 +31,12 @@ namespace ludumdare_25.Classes
 			this.Health_current = health_max;
 
 			this.FacingDirection = Enums.Direction.Left;
+		}
+
+		public void takeDamage(int damage)
+		{
+			drawColor = Color.Red;
+			Health_current = (Health_current - damage > 0 ? Health_current - damage : 0);
 		}
 	}
 }

@@ -10,3 +10,8 @@ Content\Textures\Actors\Enemy_1.xnb
 Content\Textures\UI\TitleBG_dark.xnb
 Content\Textures\Entities\Bullet.xnb
 Content\Textures\Entities\Coin.xnb
+Content\Textures\Actors\Civilian_1_Dead.xnb
+Content\Textures\Actors\Civilian_2_Dead.xnb
+Content\Textures\Actors\Enemy_1_Dead.xnb
+Content\Textures\Actors\Player_Dead.xnb
+Content\Textures\Actors\Player_Punch.xnb

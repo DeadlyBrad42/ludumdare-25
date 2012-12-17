@@ -18,7 +18,7 @@ namespace ludumdare_25.Classes
 		int speed = 3;
 
 		public Civilian(Sprite sprite, Vector2 position, Level currentLevel)
-			: base(sprite, position, currentLevel, 10)
+			: base(sprite, position, currentLevel, 50)
 		{
 			movementPoints = Game.random.Next(3, 6);
 			movementPoints_achieved = 0;

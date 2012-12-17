@@ -38,6 +38,12 @@ namespace ludumdare_25
 		public static Texture2D Spr_Entities_Bullet;
 		public static Texture2D Spr_Entities_Coin;
 
+		public static Texture2D Spr_Actors_Civilian_1_Dead;
+		public static Texture2D Spr_Actors_Civilian_2_Dead;
+		public static Texture2D Spr_Actors_Enemy_1_Dead;
+		public static Texture2D Spr_Actors_Player_Dead;
+		public static Texture2D Spr_Actors_Player_Punch;
+
 		// Fonts
 		public static SpriteFont ArialLarge;
 		public static SpriteFont ArialSmall;
@@ -100,6 +106,12 @@ namespace ludumdare_25
 			Spr_Actors_Enemy_1 = Content.Load<Texture2D>(@"Textures\Actors\Enemy_1");
 			Spr_Entities_Bullet = Content.Load<Texture2D>(@"Textures\Entities\Bullet");
 			Spr_Entities_Coin = Content.Load<Texture2D>(@"Textures\Entities\Coin");
+
+			Spr_Actors_Civilian_1_Dead = Content.Load<Texture2D>(@"Textures\Actors\Civilian_1_Dead");
+			Spr_Actors_Civilian_2_Dead = Content.Load<Texture2D>(@"Textures\Actors\Civilian_1_Dead");
+			Spr_Actors_Enemy_1_Dead = Content.Load<Texture2D>(@"Textures\Actors\Enemy_1_Dead");
+			Spr_Actors_Player_Dead = Content.Load<Texture2D>(@"Textures\Actors\Player_Dead");
+			Spr_Actors_Player_Punch = Content.Load<Texture2D>(@"Textures\Actors\Player_Punch");
 			#endregion
 
 			// Initialize fonts

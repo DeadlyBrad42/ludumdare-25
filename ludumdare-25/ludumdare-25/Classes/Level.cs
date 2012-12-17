@@ -61,7 +61,7 @@ namespace ludumdare_25
 			// Remove actors with negative positions
 			for (int entityCount = 0; entityCount < Entities.Count; entityCount++)
 			{
-				if (Entities[entityCount].position.X < -50)
+				if (Entities[entityCount].position.X < -10)
 				{
 					Entities.RemoveAt(entityCount);
 					entityCount = 0;
@@ -94,6 +94,9 @@ namespace ludumdare_25
 
 			// draw player
 			player1.Draw(spriteBatch);
+
+			// Draw HUD
+			spriteBatchHUD.DrawString(Game.ArialSmall, "health: " + player1.Health_current, Vector2.Zero, Color.Black);
 		}
 
 		private void UpdateCameraPosition()
