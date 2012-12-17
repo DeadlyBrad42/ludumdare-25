@@ -15,7 +15,7 @@ namespace ludumdare_25.Classes
 		protected Level currentLevel;
 
 
-		//protected float currentFrameTime;
+		public float currentFrameTime;
 
 		public Entity(Sprite sprite, Vector2 position, Level currentMap)
 		{

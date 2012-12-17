@@ -41,9 +41,6 @@ namespace ludumdare_25.Classes
 
 			AI(gameTime);
 
-			// Center the camera on the player
-			Camera.Position.X = position.X;
-
 			//base.Update(gameTime);
 		}
 
@@ -67,16 +64,16 @@ namespace ludumdare_25.Classes
 		public void AI(GameTime gameTime)
 		{
 			if (
-				Math.Abs(position.X - currentLevel.player1.position.X) < 450 &&	// Position is within one screen of player
+				Math.Abs(position.X - currentLevel.player1.position.X) < 450 &&	// Position is (close to being) within one screen of player
 				!movingToPoint													// And not currently moving towards a point
 			)
 			{
-				if (movementPoints_achieved <= movementPoints)					// If civilian isn't "spent"
+				if (movementPoints_achieved < movementPoints)					// If civilian isn't "spent"
 				{
 					// Pick next point
 					nextPoint = new Vector2(
 						Game.random.Next(600) + currentLevel.player1.position.X - 300,
-						Game.random.Next(200) + 425 - this.sprite.height
+						Game.random.Next(175) + 425 - this.sprite.height
 					);
 
 					movingToPoint = true;
@@ -85,41 +82,45 @@ namespace ludumdare_25.Classes
 					// Run towards beginning of level
 					nextPoint = new Vector2(-200, 500);
 					speed = 5;
+					movingToPoint = true;
 				}
 			}
 
-			// Move towards the next point - Horiztonal direction
-			if(position.X > nextPoint.X)
+			if (movingToPoint)
 			{
-				if (Math.Abs(position.X - nextPoint.X) <= speed)
-					position.X = nextPoint.X;
-				else
-					position.X -= speed;
-				FacingDirection = Enums.Direction.Left;
-			}
-			else if(position.X < nextPoint.X)
-			{
-				if (Math.Abs(position.X - nextPoint.X) <= speed)
-					position.X = nextPoint.X;
-				else
-					position.X += speed;
-				FacingDirection = Enums.Direction.Right;
-			}
+				// Move towards the next point - Horiztonal direction
+				if (position.X > nextPoint.X)
+				{
+					if (Math.Abs(position.X - nextPoint.X) <= speed)
+						position.X = nextPoint.X;
+					else
+						position.X -= speed;
+					FacingDirection = Enums.Direction.Left;
+				}
+				else if (position.X < nextPoint.X)
+				{
+					if (Math.Abs(position.X - nextPoint.X) <= speed)
+						position.X = nextPoint.X;
+					else
+						position.X += speed;
+					FacingDirection = Enums.Direction.Right;
+				}
 
-			// Move towards the next point - Horizontal direction
-			if (position.Y > nextPoint.Y)
-			{
-				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
-					position.Y= nextPoint.Y;
-				else
-					position.Y -= speed;
-			}
-			else if (position.Y < nextPoint.Y)
-			{
-				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
-					position.Y = nextPoint.Y;
-				else
-					position.Y += speed;
+				// Move towards the next point - Horizontal direction
+				if (position.Y > nextPoint.Y)
+				{
+					if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+						position.Y = nextPoint.Y;
+					else
+						position.Y -= speed;
+				}
+				else if (position.Y < nextPoint.Y)
+				{
+					if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+						position.Y = nextPoint.Y;
+					else
+						position.Y += speed;
+				}
 			}
 
 			// If you've reached the next point, set movingToPoint to false
@@ -131,8 +132,6 @@ namespace ludumdare_25.Classes
 				movementPoints_achieved++;
 				movingToPoint = false;
 			}
-
-			// Run off-screen, dissapear
 		}
 	}
 }

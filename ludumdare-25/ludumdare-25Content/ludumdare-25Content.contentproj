@@ -44,7 +44,6 @@
   <ItemGroup>
     <Folder Include="Music\" />
     <Folder Include="Sounds\" />
-    <Folder Include="Textures\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fonts\ArialLarge.spritefont">
@@ -108,6 +107,20 @@
   <ItemGroup>
     <Compile Include="Textures\UI\TitleBG_dark.png">
       <Name>TitleBG_dark</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Entities\Bullet.png">
+      <Name>Bullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Entities\Coin.png">
+      <Name>Coin</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

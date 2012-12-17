@@ -33,9 +33,6 @@ namespace ludumdare_25.Classes
 
 			AI(gameTime);
 
-			// Center the camera on the player
-			Camera.Position.X = position.X;
-
 			//base.Update(gameTime);
 		}
 
@@ -73,7 +70,6 @@ namespace ludumdare_25.Classes
 					// Y direction
 					if (Math.Abs(this.position.Y - currentLevel.player1.position.Y) > 7)
 					{
-						System.Diagnostics.Debug.WriteLine("cop moving in Y!");
 						// Pick next point
 						nextPoint = new Vector2(
 							this.position.X,
@@ -86,7 +82,6 @@ namespace ludumdare_25.Classes
 					// X direction
 					if (Math.Abs(this.position.X - currentLevel.player1.position.X) > 350)
 					{
-						System.Diagnostics.Debug.WriteLine("cop moving in X!");
 						// Pick next point
 						nextPoint = new Vector2(
 							(
@@ -102,8 +97,14 @@ namespace ludumdare_25.Classes
 				}
 				else
 				{
-					// shoot
-					System.Diagnostics.Debug.WriteLine("cop BANG!");
+					currentLevel.addEntity(
+						new Bullet(
+							new Sprite(Game.Spr_Entities_Bullet, 42, 68, 0),
+							this.position,
+							this.currentLevel,
+							this.FacingDirection
+						)
+					);
 				}
 			}
 

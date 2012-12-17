@@ -122,24 +122,24 @@ namespace ludumdare_25
 				level
 			);
 			// Enemies
-			level.Actors.Add(
+			level.Entities.Add(
 				new Enemy(
 					new Sprite(Game.Spr_Actors_Enemy_1, 42, 68, 3),
 					new Vector2(600, 500),
 					level
 				)
 			);
-			level.Actors.Add(
+			level.Entities.Add(
 				new Civilian(
 					new Sprite(Game.Spr_Actors_Civilian_1, 42, 68, 3),
-					new Vector2(1000, 500),
+					new Vector2(1200, 500),
 					level
 				)
 			);
-			level.Actors.Add(
+			level.Entities.Add(
 				new Civilian(
 					new Sprite(Game.Spr_Actors_Civilian_2, 42, 68, 3),
-					new Vector2(1100, 500),
+					new Vector2(1300, 500),
 					level
 				)
 			);

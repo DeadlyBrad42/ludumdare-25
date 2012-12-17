@@ -35,6 +35,8 @@ namespace ludumdare_25
 		public static Texture2D Spr_Actors_Civilian_1;
 		public static Texture2D Spr_Actors_Civilian_2;
 		public static Texture2D Spr_Actors_Enemy_1;
+		public static Texture2D Spr_Entities_Bullet;
+		public static Texture2D Spr_Entities_Coin;
 
 		// Fonts
 		public static SpriteFont ArialLarge;
@@ -96,6 +98,8 @@ namespace ludumdare_25
 			Spr_Actors_Civilian_1 = Content.Load<Texture2D>(@"Textures\Actors\Civilian_1");
 			Spr_Actors_Civilian_2 = Content.Load<Texture2D>(@"Textures\Actors\Civilian_2");
 			Spr_Actors_Enemy_1 = Content.Load<Texture2D>(@"Textures\Actors\Enemy_1");
+			Spr_Entities_Bullet = Content.Load<Texture2D>(@"Textures\Entities\Bullet");
+			Spr_Entities_Coin = Content.Load<Texture2D>(@"Textures\Entities\Coin");
 			#endregion
 
 			// Initialize fonts

@@ -16,17 +16,18 @@ namespace ludumdare_25.Classes
 		public Bullet(Sprite sprite, Vector2 position, Level currentLevel, Enums.Direction facingDirection)
 			: base(sprite, position, currentLevel)
 		{
+			this.FacingDirection = facingDirection;
 		}
 
 		public override void Update(GameTime gameTime)
 		{
 			if (FacingDirection == Enums.Direction.Left)
 			{
-				this.position += new Vector2(0, (-1) * speed);
+				this.position.X += (-1) * speed;
 			}
 			else if (FacingDirection == Enums.Direction.Right)
 			{
-				this.position += new Vector2(0, speed);
+				this.position.X += speed;
 			}
 
 			//base.Update(gameTime);
@@ -37,7 +38,7 @@ namespace ludumdare_25.Classes
 			spritebatch.Draw(
 				this.sprite.texture,
 				Camera.getScreenPosition(position),
-				this.sprite.getDrawArea(FacingDirection),
+				this.sprite.texture.Bounds,
 				Color.White,
 				0f,
 				Vector2.Zero,

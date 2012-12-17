@@ -32,22 +32,24 @@ namespace ludumdare_25
 		}
 
 		List<BackgroundItem> backgrounds;
-		public List<Actor> Actors;
+		public List<Entity> Entities;
+		public List<Entity> Entities_ToAdd;
 		public Player player1;
 		public Rectangle playBounds;
 
 		public Level()
 		{
 			backgrounds = new List<BackgroundItem>();
-			Actors = new List<Actor>();
+			Entities = new List<Entity>();
+			Entities_ToAdd = new List<Entity>();
 		}
 
 		public void Update(GameTime gameTime)
 		{
 			// update actors
-			foreach (Actor actor in Actors)
+			foreach (Entity entity in Entities)
 			{
-				actor.Update(gameTime);
+				entity.Update(gameTime);
 			}
 
 			// update player
@@ -55,6 +57,25 @@ namespace ludumdare_25
 
 			// update camera position
 			UpdateCameraPosition();
+
+			// Remove actors with negative positions
+			for (int entityCount = 0; entityCount < Entities.Count; entityCount++)
+			{
+				if (Entities[entityCount].position.X < -50)
+				{
+					Entities.RemoveAt(entityCount);
+					entityCount = 0;
+				}
+			}
+
+			// Add any new actors
+			for (int entityCount = 0; entityCount < Entities_ToAdd.Count; entityCount++)
+			{
+				Entities.Add(Entities_ToAdd[entityCount]);
+				Entities_ToAdd.RemoveAt(entityCount);
+				entityCount = 0;
+			}
+			
 		}
 
 		public void Draw(SpriteBatch spriteBatch, SpriteBatch spriteBatchHUD)
@@ -66,9 +87,9 @@ namespace ludumdare_25
 			}
 
 			//draw actors
-			foreach (Actor actor in Actors)
+			foreach (Entity entity in Entities)
 			{
-				actor.Draw(spriteBatch);
+				entity.Draw(spriteBatch);
 			}
 
 			// draw player
@@ -83,6 +104,11 @@ namespace ludumdare_25
 				if (Camera.Position.X + (Game.SCREEN_WIDTH / 2) > this.playBounds.Right)
 					Camera.Position.X = this.playBounds.Right - (Game.SCREEN_WIDTH / 2);
 			}
+		}
+
+		public void addEntity(Entity entity)
+		{
+			Entities_ToAdd.Add(entity);
 		}
 
 		public void addBackgroundItem(Texture2D texture, Vector2 position, float speed, float layerDepth)
