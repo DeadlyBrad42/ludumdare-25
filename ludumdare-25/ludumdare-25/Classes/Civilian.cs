@@ -29,6 +29,9 @@ namespace ludumdare_25.Classes
 
 		public override void Update(GameTime gameTime)
 		{
+			// Dead
+			if (this.Health_current == 0) this.position.X = -100;
+
 			// Handle animations
 			if (movementState == MovementState.Walking)
 			{
@@ -50,13 +53,15 @@ namespace ludumdare_25.Classes
 				this.sprite.texture,
 				Camera.getScreenPosition(position),
 				this.sprite.getDrawArea(FacingDirection),
-				Color.White,
+				drawColor,
 				0f,
 				Vector2.Zero,
 				1f,
 				SpriteEffects.None,
 				/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
 			);
+
+			this.drawColor = Color.White;
 
 			base.Draw(spritebatch);
 		}

@@ -31,11 +31,13 @@ namespace ludumdare_25.Classes
 			this.Health_current = health_max;
 
 			this.FacingDirection = Enums.Direction.Left;
+
+			drawColor = Color.White;
 		}
 
 		public void takeDamage(int damage)
 		{
-			drawColor = Color.Red;
+			this.drawColor = Color.Red;
 			Health_current = (Health_current - damage > 0 ? Health_current - damage : 0);
 		}
 	}

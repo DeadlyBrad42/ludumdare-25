@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ludumdare_25.Utils;
 using ludumdare_25.Managers;
+using System;
 
 namespace ludumdare_25.Classes
 {
@@ -16,7 +17,7 @@ namespace ludumdare_25.Classes
 
 		int speed = 2;
 
-		public float attackspeed = 300;
+		public float attackspeed = 200;
 		public float lastattack;
 		public bool attacking;
 
@@ -25,6 +26,9 @@ namespace ludumdare_25.Classes
 		{
 			playerIndex = 0;
 			FacingDirection = Enums.Direction.Right;
+
+			lastattack = 300;
+			attacking = false;
 		}
 
 		public override void Update(GameTime gameTime)
@@ -42,13 +46,8 @@ namespace ludumdare_25.Classes
 			lastattack += (float)gameTime.ElapsedGameTime.Milliseconds;
 
 			// Handle punching
-			if (attacking && (lastattack > attackspeed))
-			{
-				// We are done attacking
-				attacking = false;
-			}
 			if (
-				lastattack > attackspeed &&
+				!attacking &&
 				(
 					InputManager.WasButtonPressed(playerIndex, Buttons.A) ||
 					InputManager.WasKeyPressed(Keys.Space)
@@ -57,6 +56,38 @@ namespace ludumdare_25.Classes
 			{
 				lastattack = 0;
 				attacking = true;
+			}
+			if (lastattack > attackspeed)
+			{
+				// We are done attacking
+				attacking = false;
+			}
+
+			// If the middle X of this hits the middle X of the player, deal damage
+			if (attacking)
+			{
+				foreach (Entity entity in currentLevel.Entities)
+				{
+					if (entity is Actor)
+					{
+						if (
+							(
+								FacingDirection == Enums.Direction.Left &&
+								Math.Abs((this.position.X - 42) - entity.position.X) < 40 &&
+								Math.Abs(this.position.Y - entity.position.Y) < 10
+							) ||
+							(
+								FacingDirection == Enums.Direction.Right &&
+								Math.Abs((this.position.X + 60) - entity.position.X) < 40 &&
+								Math.Abs(this.position.Y - entity.position.Y) < 10
+							)
+						)
+						{
+							((Actor)entity).takeDamage((5 - (int)Math.Abs(this.position.Y - entity.position.Y)) * 5);
+							attacking = false;
+						}
+					}
+				}
 			}
 
 			Move(gameTime);
@@ -69,30 +100,16 @@ namespace ludumdare_25.Classes
 
 		public override void Draw(SpriteBatch spritebatch)
 		{
-			if (!attacking)
-			{
-				spritebatch.Draw(
-					this.sprite.texture,
-					Camera.getScreenPosition(position),
-					this.sprite.getDrawArea(FacingDirection),
-					drawColor,
-					0f,
-					Vector2.Zero,
-					1f,
-					SpriteEffects.None,
-					/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
-				);
-			}
-			else if (lastattack < attackspeed)
+			if (lastattack < attackspeed)
 			{
 				int left = 0;
 				int right = 0;
 
-				if (lastattack <= 100) {left = 0;}
-				else if (lastattack <= 200) {left = 1;}
-				else {left = 2;}
+				if (lastattack <= 75) { left = 0; }
+				else if (lastattack <= 150) { left = 1; }
+				else { left = 2; }
 
-				if(this.FacingDirection == Enums.Direction.Right) {right = 0;}
+				if (this.FacingDirection == Enums.Direction.Right) { right = 0; }
 				else { right = 1; }
 
 				spritebatch.Draw(
@@ -108,10 +125,19 @@ namespace ludumdare_25.Classes
 				);
 			}
 			else
-			{ }
-
-
-
+			{
+				spritebatch.Draw(
+					this.sprite.texture,
+					Camera.getScreenPosition(position),
+					this.sprite.getDrawArea(FacingDirection),
+					drawColor,
+					0f,
+					Vector2.Zero,
+					1f,
+					SpriteEffects.None,
+					/*LayerDepth*/ (0.5f * (this.position.Y / 600f)) + 0.25f
+				);
+			}
 
 			base.Draw(spritebatch);
 
