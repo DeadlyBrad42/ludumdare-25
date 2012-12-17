@@ -14,9 +14,13 @@ namespace ludumdare_25.Classes
 		bool movingToPoint;
 		Vector2 nextPoint;
 
+		float shootspeed = 500;
+		float lastshotfired;
+
 		public Enemy(Sprite sprite, Vector2 position, Level currentLevel)
 			: base(sprite, position, currentLevel, 10)
 		{
+			lastshotfired = 250;
 		}
 
 		public override void Update(GameTime gameTime)
@@ -30,6 +34,8 @@ namespace ludumdare_25.Classes
 			{
 				sprite.AnimationFrame_Current = 0;
 			}
+
+			lastshotfired += (float)gameTime.ElapsedGameTime.Milliseconds;
 
 			AI(gameTime);
 
@@ -97,14 +103,18 @@ namespace ludumdare_25.Classes
 				}
 				else
 				{
-					currentLevel.addEntity(
-						new Bullet(
-							new Sprite(Game.Spr_Entities_Bullet, 42, 68, 0),
-							this.position,
-							this.currentLevel,
-							this.FacingDirection
-						)
-					);
+					if (lastshotfired > shootspeed)
+					{
+						lastshotfired = 0;
+						currentLevel.addEntity(
+							new Bullet(
+								new Sprite(Game.Spr_Entities_Bullet, 42, 68, 0),
+								this.position,
+								this.currentLevel,
+								this.FacingDirection
+							)
+						);
+					}
 				}
 			}
 
