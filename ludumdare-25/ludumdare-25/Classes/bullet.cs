@@ -36,8 +36,8 @@ namespace ludumdare_25.Classes
 				Math.Abs(this.position.Y - currentLevel.player1.position.Y) < 5
 			)
 			{
-				currentLevel.player1.takeDamage((5 - (int)Math.Abs(this.position.Y - currentLevel.player1.position.Y)) * 5);
-				this.position.X = -50;
+				currentLevel.player1.takeDamage((5 - (int)Math.Abs(this.position.Y - currentLevel.player1.position.Y)) * 2);
+				this.position.X = -100;
 			}
 
 			//base.Update(gameTime);

@@ -102,8 +102,7 @@ namespace ludumdare_25.Managers
 						{
 							case 0:
 								// Begin game
-								//GameManager.levels = ;
-								GameManager.GameState = GameState.Playing;
+								GameManager.GameState = GameState.Story;
 								break;
 							case 1:
 								// How to play

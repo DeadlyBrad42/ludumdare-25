@@ -18,7 +18,8 @@ namespace ludumdare_25
 		About,
 		Playing,
 		GameOver_Death,
-		GameOver_Win
+		GameOver_Win,
+		Story
 	}
 
 	static class GameManager
@@ -43,6 +44,40 @@ namespace ludumdare_25
 					)
 					{
 						GameState = GameState.MainMenu;
+					}
+					break;
+				case GameState.GameOver_Death:
+					// Await input to go back to main menu
+					if (
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.A) ||
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.Start) ||
+						InputManager.WasKeyPressed(Keys.Space)
+					)
+					{
+						GameState = GameState.MainMenu;
+					}
+					break;
+				case GameState.GameOver_Win:
+					// Await input to go back to main menu
+					if (
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.A) ||
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.Start) ||
+						InputManager.WasKeyPressed(Keys.Space)
+					)
+					{
+						GameState = GameState.MainMenu;
+					}
+					break;
+				case GameState.Story:
+					// Await input to go back to main menu
+					if (
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.A) ||
+						InputManager.WasButtonPressed(PlayerIndex.One, Buttons.Start) ||
+						InputManager.WasKeyPressed(Keys.Space)
+					)
+					{
+						CreateLevels();
+						GameState = GameState.Playing;
 					}
 					break;
 				case GameState.About:
@@ -126,6 +161,20 @@ namespace ludumdare_25
 					);
 					spriteBatchHUD.DrawString(Game.ArialSmall, "You win, and get to spend $" + String.Format("{0:0.00}", levels[CurrentLevel].player1.coins), new Vector2(179, 540), Color.White);
 					break;
+				case GameState.Story:
+					spriteBatchHUD.Draw(
+						Game.Spr_UI_TitleBG_dark,
+						Vector2.Zero,
+						new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+						Color.White,
+						0f,
+						Vector2.Zero,
+						1f,
+						SpriteEffects.None,
+						1f
+					);
+					spriteBatchHUD.DrawString(Game.ArialSmall, "storyhere lol", new Vector2(179, 540), Color.White);
+					break;
 				case GameState.Playing:
 					levels[CurrentLevel].Draw(spriteBatch, spriteBatchHUD);
 					break;
@@ -175,6 +224,7 @@ namespace ludumdare_25
 			);
 
 			// Add levl
+			levels.Clear();
 			levels.Add(level);
 
 			// Init camera

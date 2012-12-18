@@ -77,7 +77,7 @@ namespace ludumdare_25.Classes
 						if (
 							(
 								FacingDirection == Enums.Direction.Left &&
-								Math.Abs((this.position.X - 42) - entity.position.X) < 2 &&
+								Math.Abs((this.position.X - 42) - entity.position.X) < 5 &&
 								Math.Abs(this.position.Y - entity.position.Y) < 10
 							) ||
 							(
@@ -98,6 +98,11 @@ namespace ludumdare_25.Classes
 
 			// Center the camera on the player
 			Camera.Position.X = position.X;
+
+			if (Health_current == 0)
+			{
+				GameManager.GameState = GameState.GameOver_Death;
+			}
 
 			//base.Update(gameTime);
 		}
