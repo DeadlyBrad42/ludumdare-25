@@ -111,6 +111,7 @@
     <Compile Include="Classes\Bullet.cs" />
     <Compile Include="Classes\Camera.cs" />
     <Compile Include="Classes\Civilian.cs" />
+    <Compile Include="Classes\Coin.cs" />
     <Compile Include="Classes\Enemy.cs" />
     <Compile Include="Classes\Entity.cs" />
     <Compile Include="Classes\Level.cs" />

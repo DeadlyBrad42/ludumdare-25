@@ -96,7 +96,8 @@ namespace ludumdare_25
 			player1.Draw(spriteBatch);
 
 			// Draw HUD
-			spriteBatchHUD.DrawString(Game.ArialSmall, "health: " + player1.Health_current, Vector2.Zero, Color.Black);
+			spriteBatchHUD.DrawString(Game.ArialSmall, "health: " + player1.Health_current, Vector2.Zero, Color.DarkRed);
+			spriteBatchHUD.DrawString(Game.ArialSmall, "$" + String.Format("{0:0.00}", player1.coins), Vector2.Zero + new Vector2(Game.SCREEN_WIDTH - 100, 0), Color.Yellow);
 		}
 
 		private void UpdateCameraPosition()

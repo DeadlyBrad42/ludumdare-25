@@ -18,9 +18,9 @@ namespace ludumdare_25.Classes
 		int speed = 3;
 
 		public Civilian(Sprite sprite, Vector2 position, Level currentLevel)
-			: base(sprite, position, currentLevel, 50)
+			: base(sprite, position, currentLevel, 25)
 		{
-			movementPoints = Game.random.Next(3, 6);
+			movementPoints = Game.random.Next(4 , 7);
 			movementPoints_achieved = 0;
 			movingToPoint = false;
 
@@ -29,9 +29,6 @@ namespace ludumdare_25.Classes
 
 		public override void Update(GameTime gameTime)
 		{
-			// Dead
-			if (this.Health_current == 0) this.position.X = -100;
-
 			// Handle animations
 			if (movementState == MovementState.Walking)
 			{
@@ -43,6 +40,20 @@ namespace ludumdare_25.Classes
 			}
 
 			AI(gameTime);
+
+			// dead
+			if (this.Health_current == 0)
+			{
+				this.currentLevel.addEntity(
+					new Coin(
+						new Sprite(Game.Spr_Entities_Coin, 42, 68, 0),
+						new Vector2(this.position.X, this.position.Y),
+						this.currentLevel,
+						Enums.Direction.Left
+					)
+				);
+				this.position.X = -100;
+			}
 
 			//base.Update(gameTime);
 		}

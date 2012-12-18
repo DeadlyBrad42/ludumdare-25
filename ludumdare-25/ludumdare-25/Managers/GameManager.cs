@@ -16,7 +16,9 @@ namespace ludumdare_25
 		MainMenu,
 		HowToPlay,
 		About,
-		Playing
+		Playing,
+		GameOver_Death,
+		GameOver_Win
 	}
 
 	static class GameManager
@@ -95,6 +97,34 @@ namespace ludumdare_25
 						1f
 					);
 					spriteBatchHUD.DrawString(Game.ArialSmall, "About screen", new Vector2(179, 540), Color.White);
+					break;
+				case GameState.GameOver_Death:
+					spriteBatchHUD.Draw(
+						Game.Spr_UI_TitleBG_dark,
+						Vector2.Zero,
+						new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+						Color.White,
+						0f,
+						Vector2.Zero,
+						1f,
+						SpriteEffects.None,
+						1f
+					);
+					spriteBatchHUD.DrawString(Game.ArialSmall, "lol u ded", new Vector2(179, 540), Color.White);
+					break;
+				case GameState.GameOver_Win:
+					spriteBatchHUD.Draw(
+						Game.Spr_UI_TitleBG_dark,
+						Vector2.Zero,
+						new Rectangle(0, 0, Game.SCREEN_WIDTH, Game.SCREEN_HEIGHT),
+						Color.White,
+						0f,
+						Vector2.Zero,
+						1f,
+						SpriteEffects.None,
+						1f
+					);
+					spriteBatchHUD.DrawString(Game.ArialSmall, "You win, and get to spend $" + String.Format("{0:0.00}", levels[CurrentLevel].player1.coins), new Vector2(179, 540), Color.White);
 					break;
 				case GameState.Playing:
 					levels[CurrentLevel].Draw(spriteBatch, spriteBatchHUD);

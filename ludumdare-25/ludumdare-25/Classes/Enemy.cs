@@ -18,7 +18,7 @@ namespace ludumdare_25.Classes
 		float lastshotfired;
 
 		public Enemy(Sprite sprite, Vector2 position, Level currentLevel)
-			: base(sprite, position, currentLevel, 75)
+			: base(sprite, position, currentLevel, 50)
 		{
 			lastshotfired = 250;
 		}

@@ -17,6 +17,8 @@ namespace ludumdare_25.Classes
 
 		int speed = 2;
 
+		public double coins;
+
 		public float attackspeed = 200;
 		public float lastattack;
 		public bool attacking;
@@ -29,6 +31,8 @@ namespace ludumdare_25.Classes
 
 			lastattack = 300;
 			attacking = false;
+
+			coins = 0;
 		}
 
 		public override void Update(GameTime gameTime)
@@ -73,17 +77,17 @@ namespace ludumdare_25.Classes
 						if (
 							(
 								FacingDirection == Enums.Direction.Left &&
-								Math.Abs((this.position.X - 42) - entity.position.X) < 40 &&
+								Math.Abs((this.position.X - 42) - entity.position.X) < 2 &&
 								Math.Abs(this.position.Y - entity.position.Y) < 10
 							) ||
 							(
 								FacingDirection == Enums.Direction.Right &&
-								Math.Abs((this.position.X + 60) - entity.position.X) < 40 &&
+								Math.Abs((this.position.X + 60) - entity.position.X) < 5 &&
 								Math.Abs(this.position.Y - entity.position.Y) < 10
 							)
 						)
 						{
-							((Actor)entity).takeDamage((5 - (int)Math.Abs(this.position.Y - entity.position.Y)) * 5);
+							((Actor)entity).takeDamage((5 - (int)Math.Abs(this.position.Y - entity.position.Y)) * 2 + 10);
 							attacking = false;
 						}
 					}
@@ -142,6 +146,11 @@ namespace ludumdare_25.Classes
 			base.Draw(spritebatch);
 
 			this.drawColor = Color.White;
+		}
+
+		public void CollectCoins(double amount)
+		{
+			coins += amount;
 		}
 
 		public void Move(GameTime gameTime)
