@@ -129,42 +129,45 @@ namespace ludumdare_25.Classes
 			else
 				FacingDirection = Enums.Direction.Left;
 
-			// Move towards the next point - Horiztonal direction
-			if (position.X > nextPoint.X)
+			if (movingToPoint)
 			{
-				if (Math.Abs(position.X - nextPoint.X) <= speed)
-					position.X = nextPoint.X;
-				else
-					position.X -= speed;
-				FacingDirection = Enums.Direction.Left;
-				moved = true;
-			}
-			else if (position.X < nextPoint.X)
-			{
-				if (Math.Abs(position.X - nextPoint.X) <= speed)
-					position.X = nextPoint.X;
-				else
-					position.X += speed;
-				FacingDirection = Enums.Direction.Right;
-				moved = true;
-			}
+				// Move towards the next point - Horiztonal direction
+				if (position.X > nextPoint.X)
+				{
+					if (Math.Abs(position.X - nextPoint.X) <= speed)
+						position.X = nextPoint.X;
+					else
+						position.X -= speed;
+					FacingDirection = Enums.Direction.Left;
+					moved = true;
+				}
+				else if (position.X < nextPoint.X)
+				{
+					if (Math.Abs(position.X - nextPoint.X) <= speed)
+						position.X = nextPoint.X;
+					else
+						position.X += speed;
+					FacingDirection = Enums.Direction.Right;
+					moved = true;
+				}
 
-			// Move towards the next point - Horizontal direction
-			if (position.Y > nextPoint.Y)
-			{
-				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
-					position.Y = nextPoint.Y;
-				else
-					position.Y -= speed;
-				moved = true;
-			}
-			else if (position.Y < nextPoint.Y)
-			{
-				if (Math.Abs(position.Y - nextPoint.Y) <= speed)
-					position.Y = nextPoint.Y;
-				else
-					position.Y += speed;
-				moved = true;
+				// Move towards the next point - Horizontal direction
+				if (position.Y > nextPoint.Y)
+				{
+					if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+						position.Y = nextPoint.Y;
+					else
+						position.Y -= speed;
+					moved = true;
+				}
+				else if (position.Y < nextPoint.Y)
+				{
+					if (Math.Abs(position.Y - nextPoint.Y) <= speed)
+						position.Y = nextPoint.Y;
+					else
+						position.Y += speed;
+					moved = true;
+				}
 			}
 
 			// If you've reached the next point, set movingToPoint to false

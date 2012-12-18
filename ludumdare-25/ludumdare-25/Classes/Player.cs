@@ -24,7 +24,7 @@ namespace ludumdare_25.Classes
 		public bool attacking;
 
 		public Player(Sprite sprite, Vector2 position, Level currentLevel)
-			: base(sprite, position, currentLevel, 100)
+			: base(sprite, position, currentLevel, 150)
 		{
 			playerIndex = 0;
 			FacingDirection = Enums.Direction.Right;
@@ -102,6 +102,14 @@ namespace ludumdare_25.Classes
 			if (Health_current == 0)
 			{
 				GameManager.GameState = GameState.GameOver_Death;
+			}
+
+			// win condition
+			if (
+				(position.X > 5600)
+			)
+			{
+				GameManager.GameState = GameState.GameOver_Win;
 			}
 
 			//base.Update(gameTime);

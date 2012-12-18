@@ -2,7 +2,6 @@ Content\Fonts\ArialLarge.xnb
 Content\Fonts\ArialSmall.xnb
 Content\Textures\SinglePixel.xnb
 Content\Textures\UI\TitleBG.xnb
-Content\Textures\Level\LevelBG.xnb
 Content\Textures\Actors\Player.xnb
 Content\Textures\Actors\Civilian_1.xnb
 Content\Textures\Actors\Civilian_2.xnb
@@ -15,3 +14,5 @@ Content\Textures\Actors\Civilian_2_Dead.xnb
 Content\Textures\Actors\Enemy_1_Dead.xnb
 Content\Textures\Actors\Player_Dead.xnb
 Content\Textures\Actors\Player_Punch.xnb
+Content\Textures\Level\LevelBG_1.xnb
+Content\Textures\Level\LevelBG_2.xnb

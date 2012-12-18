@@ -30,7 +30,8 @@ namespace ludumdare_25
 		public static Texture2D Spr_SinglePixel;
 		public static Texture2D Spr_UI_TitleBG;
 		public static Texture2D Spr_UI_TitleBG_dark;
-		public static Texture2D Spr_Level_LevelBG;
+		public static Texture2D Spr_Level_LevelBG_1;
+		public static Texture2D Spr_Level_LevelBG_2;
 		public static Texture2D Spr_Actors_Player;
 		public static Texture2D Spr_Actors_Civilian_1;
 		public static Texture2D Spr_Actors_Civilian_2;
@@ -99,7 +100,8 @@ namespace ludumdare_25
 			Spr_SinglePixel = Content.Load<Texture2D>(@"Textures\SinglePixel");
 			Spr_UI_TitleBG = Content.Load<Texture2D>(@"Textures\UI\TitleBG");
 			Spr_UI_TitleBG_dark = Content.Load<Texture2D>(@"Textures\UI\TitleBG_dark");
-			Spr_Level_LevelBG = Content.Load<Texture2D>(@"Textures\Level\LevelBG");
+			Spr_Level_LevelBG_1 = Content.Load<Texture2D>(@"Textures\Level\LevelBG_1");
+			Spr_Level_LevelBG_2 = Content.Load<Texture2D>(@"Textures\Level\LevelBG_2");
 			Spr_Actors_Player = Content.Load<Texture2D>(@"Textures\Actors\Player");
 			Spr_Actors_Civilian_1 = Content.Load<Texture2D>(@"Textures\Actors\Civilian_1");
 			Spr_Actors_Civilian_2 = Content.Load<Texture2D>(@"Textures\Actors\Civilian_2");

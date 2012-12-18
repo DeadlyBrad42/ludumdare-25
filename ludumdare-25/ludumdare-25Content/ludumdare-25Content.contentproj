@@ -114,13 +114,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\Level\LevelBG.png">
-      <Name>LevelBG</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Textures\UI\TitleBG_dark.png">
       <Name>TitleBG_dark</Name>
       <Importer>TextureImporter</Importer>
@@ -144,6 +137,18 @@
   <ItemGroup>
     <Compile Include="Textures\Actors\Player_Punch.png">
       <Name>Player_Punch</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\Level\LevelBG_1.png">
+      <Name>LevelBG_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\Level\LevelBG_2.png">
+      <Name>LevelBG_2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
