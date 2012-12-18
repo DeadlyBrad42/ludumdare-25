@@ -77,13 +77,13 @@ namespace ludumdare_25.Classes
 						if (
 							(
 								FacingDirection == Enums.Direction.Left &&
-								Math.Abs((this.position.X - 42) - entity.position.X) < 5 &&
-								Math.Abs(this.position.Y - entity.position.Y) < 10
+								Math.Abs((this.position.X - 42) - (entity.position.X + entity.sprite.width/2)) < 40 &&
+								Math.Abs(this.position.Y - entity.position.Y) < 7
 							) ||
 							(
 								FacingDirection == Enums.Direction.Right &&
-								Math.Abs((this.position.X + 60) - entity.position.X) < 5 &&
-								Math.Abs(this.position.Y - entity.position.Y) < 10
+								Math.Abs((this.position.X + 60) - (entity.position.X + entity.sprite.width/2)) < 40 &&
+								Math.Abs(this.position.Y - entity.position.Y) < 7
 							)
 						)
 						{
