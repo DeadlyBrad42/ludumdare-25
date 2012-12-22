@@ -14,7 +14,7 @@ This year's Ludum Dare theme was "You are the villain".
 Art is not my strongest suit, and to be honest I was more interested in building a game than drawing sprites for one.
 * Sprites are ripped from River City Ransom, with some light re-coloring by me.
 * Terrain and background art is from [Liberated Pixel Cup Base Assets](http://opengameart.org/content/liberated-pixel-cup-base-assets-sprites-map-tiles) set, from [OpenGameArt.org](http://opengameart.org).
-* Prison image found on Flickr (TODO: Find source link)
+* I fount the prison image [on Flickr](http://www.flickr.com/photos/41894165897@N01/2321458507)
 
 ## Man, this code seriously sucks.
 Yeah, it does :( I was running out of time while making it, but I had no shortage of ideas. I wouldn't recommend anyone uses this code for anything beyond basic curiousity.
